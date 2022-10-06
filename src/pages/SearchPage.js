@@ -43,11 +43,11 @@ const SearchPage = () => {
   };
 
   return (
-    <div>
+    <div className='w-100 bg-color-black'>
       <div className='pt-5 pb-5'>
         <h2>Dictionary search and management</h2>
       </div>
-      <div className='mx-auto p-5'>
+      <div className='p-5 d-flex align-self-center justify-content-center'>
         <form>
           <FormGroup>
             <Stack direction="horizontal" gap={3}>
@@ -62,7 +62,7 @@ const SearchPage = () => {
           </FormGroup>
         </form>
       </div>
-      <div className='p-5'>
+      <div className='p-5 d-flex align-self-center justify-content-center'>
         {isLoading && <Alert key={'info'} variant={'info'}>Searching...</Alert>}
         {addWordMutation.isFetching && <Alert key={'info'} variant={'info'}>Adding new word...</Alert>}
         {removeWordMutation.isFetching && <Alert key={'info'} variant={'info'}>Removing word...</Alert>}
@@ -71,9 +71,9 @@ const SearchPage = () => {
           <Alert key={'warning'} variant={'warning'}>Word not found, click <Alert.Link onClick={addWord}>here</Alert.Link> add {query} to dictionary.</Alert>
         )}
         {!isLoading && data && (
-          <ListGroup>
+          <ListGroup style={{'width': '500px'}}>
             {data.map(match => (
-              <ListGroupItem>{match}<Button className='mx-4' variant="danger" onClick={() => removeWord(match)}>Delete</Button></ListGroupItem>
+              <ListGroupItem className='d-flex justify-content-between align-items-center'>{match}<Button className='mx-4' variant="danger" onClick={() => removeWord(match)}>Delete</Button></ListGroupItem>
             ))}
           </ListGroup>
         )}
