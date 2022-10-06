@@ -65,8 +65,8 @@ const SearchPage = () => {
       <div className='p-5 d-flex align-items-center justify-content-center flex-column'>
         <div style={{'width': '500px'}}>
           {isLoading && <Alert key={'info'} variant={'info'}>Searching...</Alert>}
-          {addWordMutation.isFetching && <Alert key={'info'} variant={'info'}>Adding new word...</Alert>}
-          {removeWordMutation.isFetching && <Alert key={'info'} variant={'info'}>Removing word...</Alert>}
+          {addWordMutation.isLoading && <Alert key={'info'} variant={'info'}>Adding new word...</Alert>}
+          {removeWordMutation.isLoading && <Alert key={'info'} variant={'info'}>Removing word...</Alert>}
           {isError && <Alert key={'danger'} variant={'danger'}>Error while searching on dictionary.</Alert>}
           {!isLoading && data && data.length === 0 && (
             <Alert key={'warning'} variant={'warning'}>Word not found, click <Alert.Link onClick={addWord}>here</Alert.Link> add {query} to dictionary.</Alert>
@@ -75,7 +75,7 @@ const SearchPage = () => {
         {!isLoading && data && (
           <ListGroup style={{'width': '500px'}}>
             {data.map(match => (
-              <ListGroupItem className='d-flex justify-content-between align-items-center'>{match}<Button className='mx-4' variant="danger" onClick={() => removeWord(match)}>Delete</Button></ListGroupItem>
+              <ListGroupItem className='d-flex justify-content-between align-items-center'>{match}<Button className='mx-4' variant="danger" disabled={addWordMutation.isLoading || removeWordMutation.isLoading} onClick={() => removeWord(match)}>Delete</Button></ListGroupItem>
             ))}
           </ListGroup>
         )}
